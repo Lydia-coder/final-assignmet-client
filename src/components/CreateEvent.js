@@ -10,6 +10,7 @@ export default function CreateEvent(props) {
         value={props.values.image}
         onChange={props.onChange}
       ></input>
+      <label>EVENT</label>
       <input
         type="text"
         name="name"

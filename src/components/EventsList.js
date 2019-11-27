@@ -12,7 +12,7 @@ export default function List(props) {
         <LoginFormContainer />
         <SignUpFormContainer />
       </div>
-
+      <label>EVENTS</label>
       {props.user && <CreateEventContainer />}
 
       {props.events.map(event => (

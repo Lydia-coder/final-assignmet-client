@@ -1,23 +1,19 @@
-import React, { Component } from "react";
-// import { Link } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 
-export default class TicketList extends Component {
-  render() {
-    console.log(this.props.tickets, "WWWWTTTTTFFFF");
-    return (
-      <div>
-        {this.props.tickets.map(ticket => (
-          <div key={ticket.price}>
-            {/* <Link to={`/event/${event.id}/ticket`}> */}
-            {ticket.name} {ticket.description}
-            {/* </Link> */}
-            <img alt={ticket.picture} src={ticket.description} />
-          </div>
-        ))}
-      </div>
-    );
-  }
+export default function TicketList(props) {
+  console.log("ticket list", props);
+  return (
+    <div>
+      {props.tickets.map(ticket => (
+        <div>
+          <img src={ticket.picture} alt={ticket.id} />
+          <p>{ticket.price}</p>
+          <p>{ticket.description}</p>
+          <Link to={`/ticket/${ticket.id}`}> Ticket details</Link>
+        </div>
+      ))}
+    </div>
+  );
 }
-// bug 1 id undifiend
-//bug 2 cant see console.log of action
-//bug 3 props are empty
+// neew events get send to database action gets fired new tickets are in redux state but don't render on the page ...?

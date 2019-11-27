@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { newTicket } from "../actions";
+import { createTicket } from "../actions";
 import CreateTicket from "./CreateTicket";
 
 class CreateTicketContainer extends React.Component {
@@ -19,7 +19,7 @@ class CreateTicketContainer extends React.Component {
   onSubmit = event => {
     event.preventDefault();
 
-    this.props.newTicket(this.state);
+    this.props.createTicket(this.state, this.props.match.params.eventId);
     this.setState({
       price: "",
       picture: "",
@@ -41,4 +41,4 @@ class CreateTicketContainer extends React.Component {
   }
 }
 
-export default connect(null, { newTicket })(CreateTicketContainer);
+export default connect(null, { createTicket })(CreateTicketContainer);

@@ -5,8 +5,8 @@ import TicketList from "./TicketList";
 
 class TicketListContainer extends React.Component {
   componentDidMount() {
-    this.props.getTickets(this.props.match.eventId);
-    console.log("where?", this.props.getTickets());
+    this.props.getTickets(this.props.match.params.eventId);
+    // console.log("where?", this.props.getTickets());
   }
 
   render() {
@@ -15,8 +15,8 @@ class TicketListContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state.tickets, "WWWWWWWWHHHHHHHHL");
-  return { tickets: state.tickets, user: state.user };
+  console.log(state.events, "WWWWWWWWHHHHHHHHL");
+  return { tickets: state.events, user: state.user };
 }
 
 const mapDispatchToProps = { getTickets };

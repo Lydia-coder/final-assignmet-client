@@ -14,7 +14,7 @@ export default function CreateEvent(props) {
         type="text"
         name="price"
         placeholder="price"
-        value={props.values.name}
+        value={props.values.price}
         onChange={props.onChange}
       ></input>
       <input
