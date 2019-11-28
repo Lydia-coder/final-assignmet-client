@@ -116,10 +116,11 @@ export function newTicket(payload) {
 export const createTicket = (data, eventId) => (dispatch, getState) => {
   console.log("Event Id", eventId);
   const state = getState();
-  const { jwt } = state;
+  const { user } = state;
+
   request
     .post(`${baseUrl}/event/${eventId}/ticket`)
-    .set("Authorization", `Bearer ${jwt}`)
+    .set("Authorization", `Bearer ${user}`)
     .send(data)
     .then(response => {
       console.log(response);
@@ -142,7 +143,7 @@ export const getTicket = ticketId => (dispatch, getState) => {
   const { tickets } = state;
 
   if (!tickets.length) {
-    request(`${baseUrl}/event/${ticketId}`)
+    request(`${baseUrl}/ticket/${ticketId}`)
       .then(res => {
         console.log("RESPONSE??", res);
         const action = oneTicket(res.body);

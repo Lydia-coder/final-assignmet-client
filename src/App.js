@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-// import LoginFormContainer from "./components/LoginFormContainer";
-// import SignUpFormContainer from "./components/SignUpFormContainer";
+
 import EventsListContainer from "./components/EventsListContainer";
 import TicketListContainer from "./components/TicketListContainer";
 import CreateTicketContainer from "./components/CreateTicketContainer";

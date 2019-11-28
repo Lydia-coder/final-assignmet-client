@@ -20,6 +20,11 @@ export default function List(props) {
           <Link to={`/event/${event.id}/ticket`}>
             {event.name} {event.description}
           </Link>
+          <Link to={`/event/${event.id}/ticket/create`}>Create ticket</Link>
+
+          <p>
+            {event.name} {event.description}
+          </p>
           <img alt={event.name} src={event.image} />
         </div>
       ))}

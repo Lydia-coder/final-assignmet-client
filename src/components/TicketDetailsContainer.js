@@ -30,15 +30,12 @@ class TicketDetailsContainer extends React.Component {
   render() {
     return (
       <div>
-        <TicketDetails
-          tickets={this.props.tickets}
-          user={this.props.user}
-          comment={this.props.comment}
-        />
+        <TicketDetails tickets={this.props.tickets} user={this.props.user} />
         <CommentForm
           onSubmit={this.onSubmit}
           onChange={this.onChange}
           values={this.state}
+          comment={this.props.comment}
         />
       </div>
     );
