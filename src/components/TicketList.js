@@ -7,7 +7,6 @@ export default function TicketList(props) {
     <div>
       {props.tickets.map(ticket => (
         <div>
-          <img src={ticket.picture} alt={ticket.id} />
           <p>{ticket.price}</p>
           <p>{ticket.description}</p>
           <Link to={`/ticket/${ticket.id}`}> Ticket details</Link>

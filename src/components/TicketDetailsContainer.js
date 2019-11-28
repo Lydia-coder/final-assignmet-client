@@ -1,26 +1,56 @@
 import React from "react";
-import { getTicket } from "../actions";
+import { getTicket, createComment } from "../actions";
 import { connect } from "react-redux";
 import TicketDetails from "./TicketDetails";
+import CommentForm from "./CommentForm";
 
 class TicketDetailsContainer extends React.Component {
+  state = {
+    comment: ""
+  };
+
+  onChange = event => {
+    this.setState({
+      [event.target.name]: event.target.values
+    });
+  };
+  onSubmit = event => {
+    event.preventDefault();
+
+    this.props.createComment(this.state, this.props.match.params.ticketId);
+    this.setState({
+      comment: ""
+    });
+  };
+
   componentDidMount() {
     this.props.getTicket(this.props.match.params.ticketId);
-    // console.log("where?", this.props.getEvents());
   }
 
   render() {
     return (
-      <TicketDetails tickets={this.props.tickets} user={this.props.user} />
+      <div>
+        <TicketDetails
+          tickets={this.props.tickets}
+          user={this.props.user}
+          comment={this.props.comment}
+        />
+        <CommentForm
+          onSubmit={this.onSubmit}
+          onChange={this.onChange}
+          values={this.state}
+        />
+      </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  return { tickets: state.tickets };
+  //   console.log(comment.state, "COMMENT STATE");
+  return { tickets: state.tickets, comment: state.comment };
 }
 
-const mapDispatchToProps = { getTicket };
+const mapDispatchToProps = { getTicket, createComment };
 
 export default connect(
   mapStateToProps,

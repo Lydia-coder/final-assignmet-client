@@ -13,6 +13,12 @@ class LoginFormContainer extends Component {
     event.preventDefault();
     this.props.login(this.state.username, this.state.password);
   };
+
+  // componentDidUpdate() {
+  //   if (this.props.user.length !== 0) {
+  //     this.props.history.push("/event"); //  => try to understand...
+  //   }
+  // }
   render() {
     return (
       <div>
@@ -25,6 +31,7 @@ class LoginFormContainer extends Component {
     );
   }
 }
+
 const mapStateToProps = state => ({
   user: state.user
 });

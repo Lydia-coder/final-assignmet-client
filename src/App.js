@@ -20,6 +20,7 @@ class App extends Component {
           component={CreateTicketContainer}
         />
         <Route path="/ticket/:ticketId" component={TicketDetailsContainer} />
+
         {/* <Route exact path="/event/:eventId/ticket" component={TicketList} /> */}
       </Provider>
     );

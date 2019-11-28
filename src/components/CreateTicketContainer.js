@@ -6,7 +6,6 @@ import CreateTicket from "./CreateTicket";
 class CreateTicketContainer extends React.Component {
   state = {
     picture: "",
-    price: "",
     description: ""
   };
 
@@ -22,7 +21,6 @@ class CreateTicketContainer extends React.Component {
     this.props.createTicket(this.state, this.props.match.params.eventId);
     this.setState({
       price: "",
-      picture: "",
       description: ""
     });
   };
@@ -30,12 +28,12 @@ class CreateTicketContainer extends React.Component {
   render() {
     return (
       <div>
+        <h1>CREATE TICKET</h1>
         <CreateTicket
           onSubmit={this.onSubmit}
           onChange={this.onChange}
           values={this.state}
         />
-        <div>HELLLLO</div>
       </div>
     );
   }

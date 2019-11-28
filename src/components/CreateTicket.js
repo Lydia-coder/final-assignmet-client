@@ -5,13 +5,6 @@ export default function CreateEvent(props) {
     <form onSubmit={props.onSubmit}>
       <input
         type="text"
-        name="picture"
-        placeholder="picture"
-        value={props.values.picture}
-        onChange={props.onChange}
-      ></input>
-      <input
-        type="text"
         name="price"
         placeholder="price"
         value={props.values.price}

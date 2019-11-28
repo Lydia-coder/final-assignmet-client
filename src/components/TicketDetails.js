@@ -1,12 +1,18 @@
 import React from "react";
-import CommentFormContainer from "./CommentFormContainer";
+
+import CommentForm from "./CommentForm";
+import { Link } from "react-router-dom";
+
 export default function TicketDetails(props) {
-  console.log("HEEEELO", props);
+  const { tickets } = props;
+  console.log("PROPS FOR COMMENT", props);
   return (
     <div>
-      <CommentFormContainer />
       <h1>Ticket Details</h1>
-      <p>{props.tickets.price}</p>
+      PRICE: <p>{tickets.price}</p>
+      DESCRIPTION:<p>{tickets.description}</p>
+      <CommentForm />
+      {/* <Link to={} ></Link> */}
     </div>
   );
 }

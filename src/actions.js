@@ -46,11 +46,11 @@ function newEvent(payload) {
 
 export const createEvent = data => (dispatch, getState) => {
   const state = getState();
-  const { user } = state;
+  const { jwt } = state;
 
   request
     .post(`${baseUrl}/events`)
-    .set("Authorization", `Bearer ${user}`)
+    .set("Authorization", `Bearer ${jwt}`)
     .send(data)
     .then(response => {
       const action = newEvent(response.body);
@@ -96,9 +96,9 @@ export const getTickets = eventId => (dispatch, getState) => {
   if (!tickets.length) {
     request(`${baseUrl}/event/${eventId}/ticket`)
       .then(res => {
-        console.log("ANYTHING??", res);
+        console.log("GETTICKETS??", res);
         const action = allTickets(res.body);
-        console.log(action, "WAAAAAAAAAT");
+        console.log(action, "ACTIONTICKET");
         dispatch(action);
       })
       .catch(console.error);
@@ -106,7 +106,7 @@ export const getTickets = eventId => (dispatch, getState) => {
 };
 
 export function newTicket(payload) {
-  console.log(payload, "WAAAAT???");
+  console.log(payload, "NEWW???");
   return {
     type: NEW_TICKET,
     payload
@@ -116,10 +116,10 @@ export function newTicket(payload) {
 export const createTicket = (data, eventId) => (dispatch, getState) => {
   console.log("Event Id", eventId);
   const state = getState();
-  const { user } = state;
+  const { jwt } = state;
   request
     .post(`${baseUrl}/event/${eventId}/ticket`)
-    .set("Authorization", `Bearer ${user}`)
+    .set("Authorization", `Bearer ${jwt}`)
     .send(data)
     .then(response => {
       console.log(response);
@@ -144,9 +144,9 @@ export const getTicket = ticketId => (dispatch, getState) => {
   if (!tickets.length) {
     request(`${baseUrl}/event/${ticketId}`)
       .then(res => {
-        console.log("ANYTHING??", res);
+        console.log("RESPONSE??", res);
         const action = oneTicket(res.body);
-        console.log(action, "WAAAAAAAAAT");
+        console.log(action, "TICKET");
         dispatch(action);
       })
       .catch(console.error);
@@ -154,7 +154,7 @@ export const getTicket = ticketId => (dispatch, getState) => {
 };
 
 export function newComment(payload) {
-  console.log(payload, "WAAAAT???");
+  console.log(payload, "COMMENT???");
   return {
     type: NEW_COMMENT,
     payload
@@ -162,7 +162,7 @@ export function newComment(payload) {
 }
 
 export const createComment = (data, ticketId) => (dispatch, getState) => {
-  console.log("Event Id", ticketId);
+  console.log("Ticket Id", ticketId);
   const state = getState();
   const { jwt } = state;
   request
@@ -170,10 +170,11 @@ export const createComment = (data, ticketId) => (dispatch, getState) => {
     .set("Authorization", `Bearer ${jwt}`)
     .send(data)
     .then(response => {
-      console.log(response);
+      console.log(response, "what is the response?");
       const action = newComment(response.body);
 
       dispatch(action);
+      console.log(action, "what is in this action?");
     })
     .catch(console.error);
 };
