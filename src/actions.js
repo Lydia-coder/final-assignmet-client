@@ -17,24 +17,38 @@ function jwt(payload) {
 }
 
 export const login = (username, password) => dispatch => {
-  request
-    .post(`${baseUrl}/login`)
-    // .set(Authorization, Bearer ${jwt})
-    .send({ username, password })
-    .then(res => {
-      const action = jwt(res.body.jwt);
-      dispatch(action);
-    });
+  return (
+    request
+      .post(`${baseUrl}/login`)
+      // .set(Authorization, Bearer ${jwt})
+      .send({ username, password })
+      .then(res => {
+        const action = jwt(res.body.jwt);
+        return dispatch(action);
+      })
+      .catch(error => {
+        if (error.response) {
+          return Promise.reject(error.response.body.message);
+        }
+        return Promise.reject(error);
+      })
+  );
 };
 
 export const signUp = data => (dispatch, getState) => {
-  request
+  return request
     .post(`${baseUrl}/user`)
     .send(data)
     .then(res => {
       console.log(res.body);
+      return Promise.resolve();
     })
-    .catch(console.error);
+    .catch(error => {
+      if (error.response) {
+        return Promise.reject(error.response.body.message);
+      }
+      return Promise.reject(error);
+    });
 };
 
 function newEvent(payload) {
@@ -46,11 +60,11 @@ function newEvent(payload) {
 
 export const createEvent = data => (dispatch, getState) => {
   const state = getState();
-  const { jwt } = state;
+  const { user } = state;
 
   request
     .post(`${baseUrl}/events`)
-    .set("Authorization", `Bearer ${jwt}`)
+    .set("Authorization", `Bearer ${user}`)
     .send(data)
     .then(response => {
       const action = newEvent(response.body);
@@ -165,10 +179,10 @@ export function newComment(payload) {
 export const createComment = (data, ticketId) => (dispatch, getState) => {
   console.log("Ticket Id", ticketId);
   const state = getState();
-  const { jwt } = state;
+  const { user } = state;
   request
     .post(`${baseUrl}/ticket/${ticketId}/comment`)
-    .set("Authorization", `Bearer ${jwt}`)
+    .set("Authorization", `Bearer ${user}`)
     .send(data)
     .then(response => {
       console.log(response, "what is the response?");

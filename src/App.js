@@ -13,10 +13,14 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Route exact path="/" component={EventsListContainer} />
-        <Route path="/event/:eventId/ticket" component={TicketListContainer} />
         <Route
           path="/event/:eventId/ticket/create"
           component={CreateTicketContainer}
+        />
+        <Route
+          exact
+          path="/event/:eventId/ticket"
+          component={TicketListContainer}
         />
         <Route path="/ticket/:ticketId" component={TicketDetailsContainer} />
 

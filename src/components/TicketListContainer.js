@@ -10,13 +10,13 @@ class TicketListContainer extends React.Component {
   }
 
   render() {
+    console.log(this.props.tickets, "tickets");
     return <TicketList tickets={this.props.tickets} user={this.props.user} />;
   }
 }
 
 function mapStateToProps(state) {
-  console.log(state.events, "EVENTS STATE");
-  return { tickets: state.events, user: state.user };
+  return { tickets: state.tickets, user: state.user };
 }
 
 const mapDispatchToProps = { getTickets };

@@ -27,7 +27,7 @@ class CreateTicketContainer extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container p-5">
         <h1>CREATE TICKET</h1>
         <CreateTicket
           onSubmit={this.onSubmit}

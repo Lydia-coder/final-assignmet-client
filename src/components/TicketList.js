@@ -1,17 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ListGroup, Button, Badge } from "react-bootstrap";
 
 export default function TicketList(props) {
   console.log("ticket list", props);
   return (
-    <div>
-      {props.tickets.map(ticket => (
-        <div>
-          <p>{ticket.price}</p>
-          <p>{ticket.description}</p>
-          <Link to={`/ticket/${ticket.id}`}> Ticket details</Link>
-        </div>
-      ))}
+    <div className="container">
+      <ListGroup>
+        {props.tickets.map(ticket => (
+          <ListGroup.Item className="my-1">
+            <div className="d-flex justify-content-between">
+              <p>{ticket.description}</p>
+              <h3>
+                <Badge variant="success" className="mr-1">
+                  {ticket.price}
+                </Badge>
+                <Link to={`/ticket/${ticket.id}`}>
+                  <Button>View details</Button>
+                </Link>
+              </h3>
+            </div>
+          </ListGroup.Item>
+        ))}
+      </ListGroup>
     </div>
   );
 }
