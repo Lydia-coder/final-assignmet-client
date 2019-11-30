@@ -5,7 +5,7 @@ import CreateTicket from "./CreateTicket";
 
 class CreateTicketContainer extends React.Component {
   state = {
-    picture: "",
+    price: "",
     description: ""
   };
 

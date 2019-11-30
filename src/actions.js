@@ -103,20 +103,15 @@ function allTickets(payload) {
   };
 }
 
-export const getTickets = eventId => (dispatch, getState) => {
-  const state = getState();
-  const { tickets } = state;
-
-  if (!tickets.length) {
-    request(`${baseUrl}/event/${eventId}/ticket`)
-      .then(res => {
-        console.log("GETTICKETS??", res);
-        const action = allTickets(res.body);
-        console.log(action, "ACTIONTICKET");
-        dispatch(action);
-      })
-      .catch(console.error);
-  }
+export const getTickets = eventId => dispatch => {
+  request(`${baseUrl}/event/${eventId}/ticket`)
+    .then(res => {
+      console.log("GETTICKETS??", res);
+      const action = allTickets(res.body);
+      console.log(action, "ACTIONTICKET");
+      dispatch(action);
+    })
+    .catch(console.error);
 };
 
 export function newTicket(payload) {
@@ -152,20 +147,15 @@ function oneTicket(payload) {
   };
 }
 
-export const getTicket = ticketId => (dispatch, getState) => {
-  const state = getState();
-  const { tickets } = state;
-
-  if (!tickets.length) {
-    request(`${baseUrl}/ticket/${ticketId}`)
-      .then(res => {
-        console.log("RESPONSE??", res);
-        const action = oneTicket(res.body);
-        console.log(action, "TICKET");
-        dispatch(action);
-      })
-      .catch(console.error);
-  }
+export const getTicket = ticketId => dispatch => {
+  request(`${baseUrl}/ticket/${ticketId}`)
+    .then(res => {
+      console.log("RESPONSE??", res);
+      const action = oneTicket(res.body);
+      console.log(action, "TICKET");
+      return dispatch(action);
+    })
+    .catch(console.error);
 };
 
 export function newComment(payload) {
@@ -190,6 +180,24 @@ export const createComment = (data, ticketId) => (dispatch, getState) => {
 
       dispatch(action);
       console.log(action, "what is in this action?");
+    })
+    .catch(console.error);
+};
+// create action all comments
+function allComments(payload) {
+  return {
+    type: ALL_TICKETS,
+    payload
+  };
+}
+
+export const getComments = eventId => dispatch => {
+  request(`${baseUrl}/event/${eventId}/ticket`)
+    .then(res => {
+      console.log("GETTICKETS??", res);
+      const action = allComments(res.body);
+      console.log(action, "ACTIONTICKET");
+      dispatch(action);
     })
     .catch(console.error);
 };

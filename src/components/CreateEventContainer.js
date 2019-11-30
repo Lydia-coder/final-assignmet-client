@@ -29,6 +29,7 @@ class CreateEventContainer extends React.Component {
       startDate: "",
       endDate: ""
     });
+    this.props.toggleCreateEventModal(false);
   };
 
   render() {
@@ -37,6 +38,7 @@ class CreateEventContainer extends React.Component {
         onSubmit={this.onSubmit}
         onChange={this.onChange}
         values={this.state}
+        {...this.props}
       />
     );
   }

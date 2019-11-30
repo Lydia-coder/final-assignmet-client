@@ -22,7 +22,8 @@ class EventList extends Component {
     super(props);
     this.state = {
       LoginModalVisible: false,
-      SignupModalVisible: false
+      SignupModalVisible: false,
+      CreateEventModalVisible: false
     };
   }
 
@@ -38,13 +39,23 @@ class EventList extends Component {
     });
   };
 
+  toggleCreateEventModal = value => {
+    this.setState({
+      CreateEventModalVisible: value
+    });
+  };
+
   render() {
     const { events, user } = this.props;
-    const { LoginModalVisible, SignupModalVisible } = this.state;
+    const {
+      CreateEventModalVisible,
+      LoginModalVisible,
+      SignupModalVisible
+    } = this.state;
     return (
       <div className="container">
         <Navbar bg="primary" variant="dark" expand="lg">
-          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+          <Navbar.Brand href="#home">TICKET SWAP</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
@@ -60,7 +71,9 @@ class EventList extends Component {
               )}
               {user && (
                 <>
-                  <Nav.Link href="#home">Create Event</Nav.Link>
+                  <Nav.Link onClick={() => this.toggleCreateEventModal(true)}>
+                    Create Event
+                  </Nav.Link>
                 </>
               )}
             </Nav>
@@ -98,6 +111,10 @@ class EventList extends Component {
         <SignUpFormContainer
           SignupModalVisible={SignupModalVisible}
           toggleSignupModal={this.toggleSignupModal}
+        />
+        <CreateEventContainer
+          CreateEventModalVisible={CreateEventModalVisible}
+          toggleCreateEventModal={this.toggleCreateEventModal}
         />
         {/* <div>
         <LoginFormContainer />

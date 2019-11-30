@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-
+import CommentFormContainer from "./components/CommentFomContainer";
 import EventsListContainer from "./components/EventsListContainer";
 import TicketListContainer from "./components/TicketListContainer";
 import CreateTicketContainer from "./components/CreateTicketContainer";
@@ -24,7 +24,10 @@ class App extends Component {
         />
         <Route path="/ticket/:ticketId" component={TicketDetailsContainer} />
 
-        {/* <Route exact path="/event/:eventId/ticket" component={TicketList} /> */}
+        <Route
+          path="/ticket/:ticketId/comment"
+          component={CommentFormContainer}
+        />
       </Provider>
     );
   }

@@ -1,5 +1,6 @@
 import React from "react";
-import { Badge } from "react-bootstrap";
+import { Badge, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function TicketDetails(props) {
   //   const { tickets } = props;
@@ -14,6 +15,15 @@ export default function TicketDetails(props) {
         </Badge>
       </h5>
       DESCRIPTION:<p>{props.tickets.description}</p>
+      {/* {props.comments.map(comment => (
+        <div key={comment.id}>
+          {" "}
+          <p comment={comment.text}></p>
+        </div> */}
+      ))}
+      <Link to={`/ticket/${props.tickets.id}/comment`}>
+        <Button>Comments</Button>
+      </Link>
     </div>
   );
 }

@@ -10,6 +10,7 @@ export default function CreateEvent(props) {
         <Form.Label>Price</Form.Label>
         <Form.Control
           type="text"
+          name="price"
           placeholder="Enter Price"
           value={props.values.price}
           onChange={props.onChange}
@@ -20,6 +21,7 @@ export default function CreateEvent(props) {
         <Form.Control
           as="textarea"
           rows="3"
+          name="description"
           value={props.values.description}
           onChange={props.onChange}
         />

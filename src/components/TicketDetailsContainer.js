@@ -22,8 +22,4 @@ function mapStateToProps(state) {
   return { tickets: state.tickets };
 }
 
-const mapDispatchToProps = { getTicket };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TicketDetailsContainer);
+export default connect(mapStateToProps, { getTicket })(TicketDetailsContainer);
