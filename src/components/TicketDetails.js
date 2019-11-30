@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function TicketDetails(props) {
   //   const { tickets } = props;
+
   console.log("PROPS FOR Details?", props);
   return (
     <div className="card p-3 mt-5">
@@ -15,15 +16,14 @@ export default function TicketDetails(props) {
         </Badge>
       </h5>
       DESCRIPTION:<p>{props.tickets.description}</p>
-      {/* {props.comments.map(comment => (
-        <div key={comment.id}>
-          {" "}
-          <p comment={comment.text}></p>
-        </div> */}
-      ))}
       <Link to={`/ticket/${props.tickets.id}/comment`}>
         <Button>Comments</Button>
       </Link>
+      {props.comments.map((comment, i) => (
+        <div key={`${i}-data`}>
+          <p>{comment.text}</p>
+        </div>
+      ))}
     </div>
   );
 }

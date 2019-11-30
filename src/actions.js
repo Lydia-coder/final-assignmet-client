@@ -6,6 +6,7 @@ export const NEW_TICKET = "NEW_TICKET";
 export const ALL_TICKETS = "ALL_TICKETS";
 export const ONE_TICKET = "ONE_TICKET";
 export const NEW_COMMENT = "NEW_COMMENT";
+export const ALL_COMMENTS = " ALL_COMMENTS";
 
 export const JWT = "JWT";
 
@@ -186,15 +187,15 @@ export const createComment = (data, ticketId) => (dispatch, getState) => {
 // create action all comments
 function allComments(payload) {
   return {
-    type: ALL_TICKETS,
+    type: ALL_COMMENTS,
     payload
   };
-}
+} //wait safe
 
-export const getComments = eventId => dispatch => {
-  request(`${baseUrl}/event/${eventId}/ticket`)
+export const getComments = ticketId => dispatch => {
+  request(`${baseUrl}/ticket/${ticketId}/comment`)
     .then(res => {
-      console.log("GETTICKETS??", res);
+      console.log("GET COMMENTS?", res);
       const action = allComments(res.body);
       console.log(action, "ACTIONTICKET");
       dispatch(action);

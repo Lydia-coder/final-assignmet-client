@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { createComment } from "../actions";
 import CommentForm from "./CommentForm";
+import { getComments } from "../actions";
 
 class CommentFormContainer extends React.Component {
   state = {
@@ -9,7 +10,7 @@ class CommentFormContainer extends React.Component {
   };
 
   componentDidMount() {
-    console.log(this.props.match.params.ticketId);
+    this.props.getComments(this.props.match.params.ticketId);
   }
 
   onChange = event => {
@@ -17,7 +18,7 @@ class CommentFormContainer extends React.Component {
       {
         text: event.target.value
       },
-      () => console.log(this.state, "====")
+      () => console.log(this.state, "are the comments?")
     );
   };
 
@@ -42,4 +43,7 @@ class CommentFormContainer extends React.Component {
   }
 }
 
-export default connect(null, { createComment })(CommentFormContainer);
+export default connect(null, { createComment, getComments })(
+  CommentFormContainer
+);
+// what is this error???
