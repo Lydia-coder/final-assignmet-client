@@ -16,6 +16,7 @@ export default function TicketDetails(props) {
         </Badge>
       </h5>
       DESCRIPTION:<p>{props.tickets.description}</p>
+      Ticket Risk:{props.tickets.risk}
       <Link to={`/ticket/${props.tickets.id}/comment`}>
         <Button>Comments</Button>
       </Link>
@@ -24,6 +25,9 @@ export default function TicketDetails(props) {
           <p>{comment.text}</p>
         </div>
       ))}
+      <Link to="/">
+        <Button variant="danger">Go back</Button>
+      </Link>
     </div>
   );
 }

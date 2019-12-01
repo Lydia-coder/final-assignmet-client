@@ -138,7 +138,7 @@ export const createTicket = (data, eventId) => (dispatch, getState) => {
 
       dispatch(action);
     })
-    .catch(console.error);
+    .catch(error => console.log("error occured", error));
 };
 
 function oneTicket(payload) {
@@ -151,6 +151,7 @@ function oneTicket(payload) {
 export const getTicket = ticketId => dispatch => {
   request(`${baseUrl}/ticket/${ticketId}`)
     .then(res => {
+      console.log("response is here", res)
       console.log("RESPONSE??", res);
       const action = oneTicket(res.body);
       console.log(action, "TICKET");
