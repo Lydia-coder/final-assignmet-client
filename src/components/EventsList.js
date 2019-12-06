@@ -96,6 +96,7 @@ class EventList extends Component {
                     <p>Starts: {event.startDate}</p>
                     <p>Ends: {event.endDate}</p>
                   </Card.Text>
+
                   <Link to={`/event/${event.id}/ticket/create`}>
                     <Button variant="primary">Create ticket</Button>
                   </Link>

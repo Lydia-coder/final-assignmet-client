@@ -5,6 +5,7 @@ import EventsListContainer from "./components/EventsListContainer";
 import TicketListContainer from "./components/TicketListContainer";
 import CreateTicketContainer from "./components/CreateTicketContainer";
 import TicketDetailsContainer from "./components/TicketDetailsContainer";
+import EditTicketFormContainer from "./components/EditTicketFormContainer"
 import store from "./store";
 import { Provider } from "react-redux";
 
@@ -13,6 +14,10 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Route exact path="/" component={EventsListContainer} />
+                <Route
+          path="/event/:eventId/ticket/:ticketId/edit"
+          component={EditTicketFormContainer}
+        /> 
         <Route
           path="/event/:eventId/ticket/create"
           component={CreateTicketContainer}
@@ -28,9 +33,12 @@ class App extends Component {
           path="/ticket/:ticketId/comment"
           component={CommentFormContainer}
         />
+
+
       </Provider>
     );
   }
 }
+//"/event/:eventId/ticket/ticketId/edit"
 
 export default App;

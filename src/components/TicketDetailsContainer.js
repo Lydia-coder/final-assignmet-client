@@ -5,6 +5,7 @@ import TicketDetails from "./TicketDetails";
 
 class TicketDetailsContainer extends React.Component {
   componentDidMount() {
+    console.log("TICKETID?", this.props.match.params.ticketId);
     this.props.getTicket(this.props.match.params.ticketId);
     this.props.getComments(this.props.match.params.ticketId);
   }
@@ -13,8 +14,10 @@ class TicketDetailsContainer extends React.Component {
     return (
       <div className="container">
         <TicketDetails
-          tickets={this.props.tickets || []}
-          comments={this.props.comments || []}
+          tickets={this.props.tickets}
+          comments={this.props.comments}
+          singleticket={this.props.match.params.ticketId}
+          ticket={this.props.ticket}
         />
       </div>
     );
@@ -26,7 +29,8 @@ function mapStateToProps(state) {
   //   console.log(tickets.state, "TICKETS STATE");
   return {
     tickets: state.tickets,
-    comments: state.comments
+    comments: state.comments,
+    ticket: state.ticket
   }; ///
 }
 

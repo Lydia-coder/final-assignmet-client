@@ -6,6 +6,7 @@ export default function(state = [], action = {}) {
       return action.payload;
     case NEW_EVENT:
       return [action.payload, ...state];
+    
     default:
       return state;
   }

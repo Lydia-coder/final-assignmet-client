@@ -17,8 +17,8 @@ class EventsListContainer extends React.Component {
 function mapStateToProps(state) {
   return {
     events: state.events,
-    user: state.user,
-    tickets: state.tickets
+    user: state.user
+    // tickets: state.tickets
     // comment: state.comment
   };
 }

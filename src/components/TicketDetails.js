@@ -2,8 +2,9 @@ import React from "react";
 import { Badge, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+
 export default function TicketDetails(props) {
-  //   const { tickets } = props;
+  console.log("ARE THERE ANY PROPS??", props);
 
   console.log("PROPS FOR Details?", props);
   return (
@@ -12,22 +13,30 @@ export default function TicketDetails(props) {
       <h5>
         PRICE:
         <Badge variant="success" className="ml-2">
-          {props.tickets.price}
+          $ {props.ticket.price}
         </Badge>
       </h5>
-      DESCRIPTION:<p>{props.tickets.description}</p>
-      Ticket Risk:{props.tickets.risk}
-      <Link to={`/ticket/${props.tickets.id}/comment`}>
+      DESCRIPTION:
+      <p>{props.ticket.description}</p>
+      Ticket Risk:
+      {props.ticket.risk}%
+      <Link to={`/ticket/${props.singleticket}/comment`}>
         <Button>Comments</Button>
       </Link>
       {props.comments.map((comment, i) => (
         <div key={`${i}-data`}>
           <p>{comment.text}</p>
+          
         </div>
+      
       ))}
-      <Link to="/">
+      <div>
+     
+      <Link to="/"> 
         <Button variant="danger">Go back</Button>
       </Link>
+      </div>
     </div>
   );
 }
+// go back button should link to ticket list

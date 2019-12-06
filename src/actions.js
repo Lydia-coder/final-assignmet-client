@@ -7,6 +7,7 @@ export const ALL_TICKETS = "ALL_TICKETS";
 export const ONE_TICKET = "ONE_TICKET";
 export const NEW_COMMENT = "NEW_COMMENT";
 export const ALL_COMMENTS = " ALL_COMMENTS";
+export const UPDATED_TICKET = "UPDATED_TICKET";
 
 export const JWT = "JWT";
 
@@ -151,7 +152,7 @@ function oneTicket(payload) {
 export const getTicket = ticketId => dispatch => {
   request(`${baseUrl}/ticket/${ticketId}`)
     .then(res => {
-      console.log("response is here", res)
+      console.log("response is here", res);
       console.log("RESPONSE??", res);
       const action = oneTicket(res.body);
       console.log(action, "TICKET");
@@ -198,8 +199,31 @@ export const getComments = ticketId => dispatch => {
     .then(res => {
       console.log("GET COMMENTS?", res);
       const action = allComments(res.body);
-      console.log(action, "ACTIONTICKET");
+      console.log(action, "CoMMENT?");
       dispatch(action);
     })
     .catch(console.error);
+};
+
+function ticketUpdated(payload) {
+  return {
+    type: UPDATED_TICKET,
+    payload
+  };
+}
+export const updateTicket = (data, ticketId) => (dispatch, getState) => {
+  const state = getState();
+  const { user } = state;
+  request
+    .put(`${baseUrl}/ticket/${ticketId}`)
+    .set("Authorization", `Bearer ${user}`)
+    .send(data)
+    .then(res => {
+      console.log("IS THERE DATA", data);
+      console.log("UPDATE TICKET", res);
+      const action = ticketUpdated(res.body);
+      console.log("UPDATE ACTION", action);
+      return dispatch(action);
+    })
+    .catch(error => console.log("error occured", error));
 };

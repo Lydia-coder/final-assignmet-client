@@ -1,10 +1,9 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
-
 import { Link } from "react-router-dom";
 
-export default function CreateEvent(props) {
-  console.log("PROPS FOR CRESTIN TICKET", props);
+export default function EditTicketForm(props) {
+  console.log("PROPS FOR EDIT?", props);
   return (
     <Form onSubmit={props.onSubmit}>
       <Form.Group controlId="formBasicEmail">
@@ -28,11 +27,14 @@ export default function CreateEvent(props) {
         />
       </Form.Group>
       <Button variant="primary" type="submit" className="mr-1">
-        Submit
+        Edit
       </Button>
-      <Link to="/">
+
+      <Link to={"/"}>
         <Button variant="danger">Cancel</Button>
       </Link>
     </Form>
   );
 }
+
+// Edit button should link to ticket list
