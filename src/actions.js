@@ -8,7 +8,8 @@ export const ONE_TICKET = "ONE_TICKET";
 export const NEW_COMMENT = "NEW_COMMENT";
 export const ALL_COMMENTS = " ALL_COMMENTS";
 export const UPDATED_TICKET = "UPDATED_TICKET";
-export const GET_PAGES = "GET_PAGES"
+// export const GET_PAGES = "GET_PAGES";
+export const OFFSET = "OFFSET";
 
 export const JWT = "JWT";
 
@@ -84,19 +85,41 @@ export function allEvents(payload) {
   };
 }
 
-export const getEvents = () => (dispatch, getState) => {
+export function offset(payload) {
+  return {
+    type: OFFSET,
+    payload
+  };
+}
+
+export const getEvents = data => (dispatch, getState) => {
+  // data.buttonType is either prev or next
+
   const state = getState();
+  console.log("ALL STATE ", data);
   const { events } = state;
+  const currentOffset = parseInt(data.getOffset || 0);
+  let prepareCurrentOffsetForStore;
 
-  if (!events.length) {
-    request(`${baseUrl}/event`)
-      .then(response => {
-        const action = allEvents(response.body);
-
-        dispatch(action);
-      })
-      .catch(console.error);
+  if (data.buttonType === "next") {
+    prepareCurrentOffsetForStore = currentOffset + 9;
+  } else if (data.buttonType === "prev") {
+    // check if currentOffset is >= 9
+    prepareCurrentOffsetForStore = currentOffset - 9;
+  } else {
+    prepareCurrentOffsetForStore = 0;
   }
+  const offsetAction = offset(prepareCurrentOffsetForStore);
+  //if (!events.length) {
+  request(`${baseUrl}/event?limit=9&offset=${prepareCurrentOffsetForStore}`)
+    .then(response => {
+      const action = allEvents(response.body);
+
+      dispatch(action);
+      dispatch(offsetAction);
+    })
+    .catch(console.error);
+  //}
 };
 
 function allTickets(payload) {
@@ -229,20 +252,20 @@ export const updateTicket = (data, ticketId) => (dispatch, getState) => {
     .catch(error => console.log("error occured", error));
 };
 
-function getPages(payload){
-  return{
-    type: GET_PAGES,
-    payload
-  }
-}
+// function getPages(payload) {
+//   return {
+//     type: GET_PAGES,
+//     payload
+//   };
+// }
 
-export const pages= (data)=>(dispatch)=>{
-  request
-  .get(`${baseUrl}/page?limit=${data.getLimit}&offset=${data.getOffset}`)
-  .send(data)
-  .then(res =>{
- const action = getPages(res.body)
- console.log(res.body)
- dispatch(action)
-  })
-}
+// export const pages = data => dispatch => {
+//   request
+//     .get(`${baseUrl}/page?limit=${data.getLimit}&offset=${data.getOffset}`)
+//     .send(data)
+//     .then(res => {
+//       const action = getPages(res.body);
+//       console.log(res.body);
+//       dispatch(action);
+//     });
+// };

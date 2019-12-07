@@ -26,11 +26,7 @@ class LoginFormContainer extends Component {
       });
   };
 
-  // componentDidUpdate() {
-  //   if (this.props.user.length !== 0) {
-  //     this.props.history.push("/event"); //  => try to understand...
-  //   }
-  // }
+ 
   render() {
     const { toggleLoginModal, LoginModalVisible } = this.props;
     const { username, password, errorMessage } = this.state;

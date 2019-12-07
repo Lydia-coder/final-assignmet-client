@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { getEvents } from "../actions";
+import { connect } from "react-redux";
 import {
   Navbar,
   Nav,
@@ -43,6 +45,27 @@ class EventList extends Component {
     this.setState({
       CreateEventModalVisible: value
     });
+  };
+
+  goToNextPage = () => {
+    // get curre
+    const data = {
+      getOffset: this.props.offset,
+      buttonType: "next"
+    };
+    this.props.getEvents(data);
+    console.log(this.props.offset, "OFF");
+
+    // get current offset from pages and add 9 to it.
+    // push it back to the redux store?????????
+  };
+
+  goToPreviousPage = () => {
+    const data = {
+      getOffset: this.props.offset,
+      buttonType: "prev"
+    };
+    this.props.getEvents(data);
   };
 
   render() {
@@ -117,32 +140,31 @@ class EventList extends Component {
           CreateEventModalVisible={CreateEventModalVisible}
           toggleCreateEventModal={this.toggleCreateEventModal}
         />
-        {/* <div>
-        <LoginFormContainer />
-          <SignUpFormContainer />
-        </div> */}
-        {/* {user && <CreateEventContainer />} */}
-
-        {/* {events.map(event => (
-          <div key={event.id}>
-            <Link to={`/event/${event.id}/ticket`}>
-              {event.name} {event.description}
-            </Link>
-            <Link to={`/event/${event.id}/ticket/create`}>Create ticket</Link>
-            <p>
-              {event.name} {event.description}
-            </p>
-            Start-Date <p>{event.startDate}</p>
-            End-Date<p>{event.endDate}</p>
-            <img alt={event.name} src={event.image} />
-          </div>
-        ))} */}
+        <Button className="btn btn-danger" onClick={this.goToPreviousPage}>
+          PREV
+        </Button>
+        <Button onClick={this.goToNextPage}>NEXT</Button>
       </div>
     );
   }
 }
 
-export default EventList;
+//export default EventList;
+
+function mapStateToProps(state) {
+  console.log(state, "PROPS NEW?");
+  return {
+    events: state.events,
+    user: state.user,
+    offset: state.offset
+    // tickets: state.tickets
+    // comment: state.comment
+  };
+}
+
+const mapDispatchToProps = { getEvents };
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventList);
 
 // export default function List(props) {
 //   if (events === null) {
